@@ -1,7 +1,12 @@
-ARG USERNAME
-ARG PASSWD
+FROM ubuntu:latest
 
-FROM ubuntu
+# Default username
+ENV USERNAME=ubuntu1
+# Default password
+ENV PASSWD=1234
+
+RUN echo $USERNAME
+RUN echo $PASSWD
 
 # Update the system, install OpenSSH Server
 RUN apt-get update && apt-get upgrade -y && \
@@ -12,9 +17,9 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y openssh-client
 
 # Create user and set password for user and root user
-RUN  useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 ubuntu && \
-    echo '$USERNAME:$PASSWD' | chpasswd && \
-    echo 'root:$PASSWD' | chpasswd
+RUN  useradd -rm -d /home/$USERNAME -s /bin/bash -g root -G sudo -u 1001 $USERNAME && \
+    echo $USERNAME:$PASSWD | chpasswd && \
+    echo root:$PASSWD | chpasswd
 
 # Set up configuration for SSH
 # service ssh start
