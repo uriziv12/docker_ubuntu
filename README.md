@@ -10,7 +10,7 @@ Docker to build ubuntu image with the common tools.
 
 ## Usage
 ```
-docker build --build-arg USERNAME=<username> --build-arg PASSWD=<password> -t ubu-img .
+docker build --build-arg usernamei=<user> --build-arg passwdi=<password> -t <image-name> .
 ```
 
 ```

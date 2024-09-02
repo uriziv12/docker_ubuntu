@@ -9,6 +9,7 @@ PS1='\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;31m\]
 
 export REPOS=~/repos
 
+alias ll='ls -alF --color'
 alias repos='cd $REPOS'
 alias gs='git status'
 alias gl='git lg'
