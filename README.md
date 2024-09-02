@@ -18,7 +18,12 @@ docker network create -d bridge --subnet=172.18.0.0/16 net1
 ```
 
 ```
-docker run -d --name ubu1 -h ubu1 --network net1 -p 3021:22 --ip 172.18.0.21 localhost/ubu-img
+docker volume create docker_volume
+```
+
+
+```
+docker run -d --name ubu1 -h ubu1 --network net1 -p 3021:22 --ip 172.18.0.21 -v /home/uriziv/docker_volume:/home/defult_user/docker_volume localhost/ubu-img
 
 docker run -d --name ubu2 -h ubu2 --network net1 -p 3022:22 --ip 172.18.0.22 localhost/ubu-img
 

@@ -1,12 +1,15 @@
 FROM ubuntu:latest
 
 # Default username
-ENV USERNAME=ubuntu1
+# ENV USERNAME=ubuntu1
 # Default password
-ENV PASSWD=1234
+# ENV PASSWD=1234
 
-RUN echo $USERNAME
-RUN echo $PASSWD
+ARG USERNAMEI=defult_user
+ARG PASSWDI=defult_password
+
+RUN echo $USERNAMEI
+RUN echo $PASSWDI
 
 # Update the system, install OpenSSH Server
 RUN apt-get update && apt-get upgrade -y && \
@@ -17,9 +20,9 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y openssh-client
 
 # Create user and set password for user and root user
-RUN  useradd -rm -d /home/$USERNAME -s /bin/bash -g root -G sudo -u 1001 $USERNAME && \
-    echo $USERNAME:$PASSWD | chpasswd && \
-    echo root:$PASSWD | chpasswd
+RUN  useradd -rm -d /home/$USERNAMEI -s /bin/bash -g root -G sudo -u 1001 $USERNAMEI && \
+    echo $USERNAMEI:$PASSWDI | chpasswd && \
+    echo root:$PASSWDI | chpasswd
 
 # Set up configuration for SSH
 # service ssh start
@@ -40,6 +43,9 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y software-properties-common
 #     && \ rm -rf /var/lib/apt/lists/*
+
+
+RUN yes | unminimize
 
 # Expose the SSH port
 EXPOSE 22
