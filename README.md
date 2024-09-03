@@ -47,6 +47,13 @@ ssh ubuntu@localhost -p 3041
 ssh ubuntu@localhost -p 3042
 ```
 
+## Notes
+In case pip doesn't work inside docker, you should use instead: {{sudo apt-get install python3-<mudule_name>}}, E.g:
+
+```
+sudo apt-get install python3-yaml
+```
+
 ## Links
 https://tecadmin.net/setting-up-ubuntu-docker-container-with-ssh-access/
 https://medium.com/@mfahad1667/ssh-connection-between-two-docker-container-7c9dced1aa43
