@@ -6,11 +6,14 @@ Docker to build ubuntu image with the common tools.
 - openssh-client
 - vim
 - sudo
+- git
+- python
+- pip
 
 
 ## Usage
 ```
-docker build --build-arg usernamei=<user> --build-arg passwdi=<password> -t <image-name> .
+docker build [--build-arg usernamei=<user>] [--build-arg passwdi=<password>] -t <image-name> .
 ```
 
 ```

@@ -3,8 +3,8 @@ FROM ubuntu:latest
 
 # Create user and set password for user and root user
 # (Note: Do not set -build-arg usernamei=ubuntu - This user already exists).
-ARG usernamei
-ARG passwdi
+ARG usernamei=docker_ubuntu
+ARG passwdi=1234
 RUN  useradd -rm -d /home/$usernamei -s /bin/bash -g root -G sudo -u 1001 $usernamei && \
     echo $usernamei:$passwdi | chpasswd && \
     echo root:$passwdi | chpasswd \
@@ -28,17 +28,22 @@ RUN mkdir /var/run/sshd && \
     echo "export VISIBLE=now" >> /etc/profile
 
 
-#Install vim
+# Install vim
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y vim
 
 
-#Install sudo
+# Install sudo
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y sudo
 
 
-#Install python
+# Install python
+# TODO: Check if after unminimize it will work with regular python
+# TODO: Check if We can
+#    install python3-full
+#    python3 -m venv path/to/venv
+#    (from container) path/to/venv/bin/python3 -m pip install -r path/to/requirements.txt
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y python-is-python3
 
@@ -65,7 +70,7 @@ COPY .bashrc /home/$usernamei/.bashrc
 USER root
 RUN chown $usernamei: /home/$usernamei/.bashrc
 
-# RUN yes | unminimize
+RUN yes | unminimize
 
 # Expose the SSH port
 EXPOSE 22
