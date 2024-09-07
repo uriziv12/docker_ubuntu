@@ -51,6 +51,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y python3-venv
 
 # Create python virtual env
+# Inside container - it's better to run python by /home/$usernamei/python_venv/bin/python3 (otherwise some tools, like pip, might be blocked).
 USER $usernamei
 RUN mkdir /home/$usernamei/python_venv
 USER root
