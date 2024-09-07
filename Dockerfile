@@ -1,5 +1,6 @@
 FROM ubuntu:latest
 
+RUN yes | unminimize
 
 # Create user and set password for user and root user
 # (Note: Do not set -build-arg usernamei=ubuntu - This user already exists).
@@ -37,31 +38,29 @@ RUN apt-get update && apt-get upgrade -y && \
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y sudo
 
-
-# Install python
-# TODO: Check if after unminimize it will work with regular python
-# TODO: Check if We can
-#    install python3-full
-#    python3 -m venv path/to/venv
-#    (from container) path/to/venv/bin/python3 -m pip install -r path/to/requirements.txt
+# Install regular python
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y python-is-python3
-
+    apt-get install -y python3
 
 #Install pip
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y pip
 
+# Install python3-venv
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y python3-venv
+
+# Create python virtual env
+USER $usernamei
+RUN mkdir /home/$usernamei/python_venv
+USER root
+RUN python3 -m venv /home/$usernamei/python_venv
+RUN chown $usernamei: /home/$usernamei/python_venv -R
+
 
 # Install git
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y git
-
-# # Add these lines before running apt-add-repository command
-# RUN apt-get update && apt-get upgrade -y && \
-#     apt-get install -y software-properties-common
-# #     && \ rm -rf /var/lib/apt/lists/*
-
 
 # Create repositories directory
 USER $usernamei
@@ -69,8 +68,6 @@ RUN mkdir /home/$usernamei/repos
 COPY .bashrc /home/$usernamei/.bashrc
 USER root
 RUN chown $usernamei: /home/$usernamei/.bashrc
-
-RUN yes | unminimize
 
 # Expose the SSH port
 EXPOSE 22
