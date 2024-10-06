@@ -15,4 +15,25 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag docker_ubuntu:$(date +%s)
+      run: docker build . --file Dockerfile --tag docker_ubuntu:${GITHUB_SHA}
+#
+#    - name: login to docker hub
+#      id: docker-hub
+#      env:
+#        username: ${{secrets.DOCKER_HUB_USERNAME}}
+#        password: ${{secrets.DOCKER_HUB_PASSWORD}}
+#      run:
+#        docker login -u $username -p $password
+#
+#    - name: echo git sha
+#      id: echo-git-sha
+#      run: echo ${GITHUB_SHA}
+#
+#
+#    - name: docker image ls
+#      id: docker-image-ls
+#      run: docker image ls
+#
+#    - name: push the docker image
+#      id: push-docker-image
+#      run: docker push docker_ubuntu:${GITHUB_SHA}
