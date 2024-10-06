@@ -38,4 +38,4 @@ jobs:
       id: push-docker-image
       env:
         username: ${{secrets.DOCKER_HUB_USERNAME}}
-      run: docker push ${username}/docker_ubuntu:${GITHUB_SHA}
+      run: echo ${GITHUB_SHA}; echo ${username}; docker push ${username}/docker_ubuntu:${GITHUB_SHA}
