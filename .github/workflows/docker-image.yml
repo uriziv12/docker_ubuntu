@@ -20,14 +20,14 @@ jobs:
     - name: login to docker hub
       id: docker-hub
       env:
-        username: ${{secrets.DOCKERHUB_USERNAME}}
-        password: ${{secrets.DOCKERHUB_PASSWORD}}
+        username: ${{secrets.DOCKER_HUB_USERNAME}}
+        password: ${{secrets.DOCKER_HUB_PASSWORD}}
       run:
         docker login -u $username -p $password
 
     - name: push the docker image
       id: push-docker-image
       env:
-        username: ${{secrets.DOCKERHUB_USERNAME}}
-        password: ${{secrets.DOCKERHUB_PASSWORD}}
-      run: docker push ${{secrets.DOCKERHUB_USERNAME}}/docker_ubuntu:${GITHUB_SHA}
+        username: ${{secrets.DOCKER_HUB_USERNAME}}
+        password: ${{secrets.DOCKER_HUB_PASSWORD}}
+      run: docker push ${{secrets.DOCKER_HUB_USERNAME}}/docker_ubuntu:${GITHUB_SHA}
