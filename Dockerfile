@@ -1,10 +1,11 @@
 FROM ubuntu:latest
 
+RUN yes | unminimize
 
 # Create user and set password for user and root user
 # (Note: Do not set -build-arg usernamei=ubuntu - This user already exists).
-ARG usernamei
-ARG passwdi
+ARG usernamei=docker_ubuntu
+ARG passwdi=1234
 RUN  useradd -rm -d /home/$usernamei -s /bin/bash -g root -G sudo -u 1001 $usernamei && \
     echo $usernamei:$passwdi | chpasswd && \
     echo root:$passwdi | chpasswd \
@@ -28,35 +29,39 @@ RUN mkdir /var/run/sshd && \
     echo "export VISIBLE=now" >> /etc/profile
 
 
-#Install vim
+# Install vim
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y vim
 
 
-#Install sudo
+# Install sudo
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y sudo
 
-
-#Install python
+# Install regular python
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y python-is-python3
-
+    apt-get install -y python3
 
 #Install pip
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y pip
 
+# Install python3-venv
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y python3-venv
+
+# Create python virtual env
+# Inside container - it's better to run python by /home/$usernamei/python_venv/bin/python3 (otherwise some tools, like pip, might be blocked).
+USER $usernamei
+RUN mkdir /home/$usernamei/python_venv
+USER root
+RUN python3 -m venv /home/$usernamei/python_venv
+RUN chown $usernamei: /home/$usernamei/python_venv -R
+
 
 # Install git
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y git
-
-# # Add these lines before running apt-add-repository command
-# RUN apt-get update && apt-get upgrade -y && \
-#     apt-get install -y software-properties-common
-# #     && \ rm -rf /var/lib/apt/lists/*
-
 
 # Create repositories directory
 USER $usernamei
@@ -64,8 +69,6 @@ RUN mkdir /home/$usernamei/repos
 COPY .bashrc /home/$usernamei/.bashrc
 USER root
 RUN chown $usernamei: /home/$usernamei/.bashrc
-
-# RUN yes | unminimize
 
 # Expose the SSH port
 EXPOSE 22
