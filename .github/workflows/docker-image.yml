@@ -17,15 +17,13 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag docker_ubuntu:${GITHUB_SHA}
 
-    - name: echo secrets.DOCKERHUB_USERNAME
-      id: echo_username
-      run:
-        echo ${{secrets.DOCKERHUB_USERNAME}}
-
     - name: login to docker hub
       id: docker-hub
+      env:
+        username: ${{secrets.DOCKERHUB_USERNAME}}
+        password: ${{secrets.DOCKERHUB_PASSWORD}}
       run:
-        docker login -u ${{secrets.DOCKERHUB_USERNAME}} -p ${{secrets.DOCKERHUB_PASSWORD}}
+        docker login -u $username -p $password
 
     - name: push the docker image
       id: push-docker-image
