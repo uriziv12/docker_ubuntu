@@ -36,6 +36,4 @@ jobs:
 
     - name: push the docker image
       id: push-docker-image
-      env:
-        username: ${{secrets.DOCKER_HUB_USERNAME}}
-      run: echo ${GITHUB_SHA}; echo ${username}; docker push ${username}/docker_ubuntu:${GITHUB_SHA}
+      run: docker push uriziv12/docker_ubuntu:${GITHUB_SHA}
