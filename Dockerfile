@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-RUN yes | unminimize
+# RUN yes | unminimize # Throws error from some reason.
 
 # Create user and set password for user and root user
 # (Note: Do not set -build-arg usernamei=ubuntu - This user already exists).
