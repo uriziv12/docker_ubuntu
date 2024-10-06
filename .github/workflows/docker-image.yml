@@ -36,4 +36,4 @@ jobs:
 
     - name: push the docker image
       id: push-docker-image
-      run: docker push uriziv12/docker_ubuntu:${GITHUB_SHA}
+      run: docker push docker_ubuntu:${GITHUB_SHA}
