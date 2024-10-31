@@ -50,8 +50,8 @@ docker run -d --name cont4 -h cont4 --network net1 -p 3024:22 --ip 172.18.0.24 <
 &nbsp;
 
 ```
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ubu1
-docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ubu2
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cont1
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cont2
 ```
 
 &nbsp;
@@ -64,9 +64,14 @@ docker inspect ubu2 | grep IPAddress
 &nbsp;
 
 ```
-ssh ubuntu@localhost -p 3041
-ssh ubuntu@localhost -p 3042
+ssh ubuntu@localhost -p 3021
+ssh ubuntu@localhost -p 3022
 ```
+
+&nbsp;
+
+##Dockerhub
+https://hub.docker.com/r/uriziv12/docker_ubuntu
 
 &nbsp;
 
