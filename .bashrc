@@ -1,3 +1,5 @@
+# This file is based on the default file that comes with the ubuntu image. Some custom changes were added and commented inline.
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
