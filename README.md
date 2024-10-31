@@ -1,5 +1,5 @@
 # docker_ubuntu
-Dockerfile for ubuntu image with the common tools.
+Dockerfile based on ubuntu image with some more common delevopment tools.
 
 ## Tools list
 - openssh-server
