@@ -64,8 +64,8 @@ docker inspect ubu2 | grep IPAddress
 &nbsp;
 
 ```
-ssh ubuntu@localhost -p 3021
-ssh ubuntu@localhost -p 3022
+ssh docker_ubuntu@localhost -p 3021
+ssh docker_ubuntu@localhost -p 3022
 ```
 
 &nbsp;
