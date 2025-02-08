@@ -11,9 +11,10 @@ RUN  useradd -rm -d /home/$usernamei -s /bin/bash -g root -G sudo -u 1001 $usern
     echo root:$passwdi | chpasswd && \
     echo ubuntu:$passwdi | chpasswd
 
-# Update the system, install OpenSSH Server, Client, vim, sudo, python3, pip, python3-venv, and git
+# Update the system, install OpenSSH Server, Client, vim, sudo, python3, pip, python3-venv, git, and zip
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y openssh-server openssh-client vim sudo python3 python3-pip python3-venv git
+    apt-get install -y openssh-server openssh-client vim sudo python3 python3-pip python3-venv git zip && \
+    apt-get clean
 
 # Set up configuration for SSH
 RUN mkdir /var/run/sshd && \
