@@ -21,48 +21,40 @@ docker build [--build-arg usernamei=<user>] [--build-arg passwdi=<password>] -t 
 
 &nbsp;
 
-To connect your container via ssh, you have to set docker network, e.g:
+To connect your container via ssh, you have to set docker networkE.g.:
 ```sh
 docker network create -d bridge --subnet=172.18.0.0/16 net1
 ```
 
 &nbsp;
 
-To share a folder with your contianer
+Create container(s) from your image. E.g.:
 ```sh
-docker volume create docker_volume
-```
-
-&nbsp;
-
-Create container(s) from your image
-```sh
-docker run -d --name cont1 -h cont1 --network net1 -p 3021:22 --ip 172.18.0.21 -v /home/uriziv/docker_volume:/home/defult_user/docker_volume <image-name>
+docker run -d --name cont1 -h cont1 --network net1 -p 3021:22 --ip 172.18.0.21 <image-name>
 
 docker run -d --name cont2 -h cont2 --network net1 -p 3022:22 --ip 172.18.0.22 <image-name>
-
-docker run -d --name cont3 -h cont3 --network net1 -p 3023:22 --ip 172.18.0.23 <image-name>
-
-docker run -d --name cont4 -h cont4 --network net1 -p 3024:22 --ip 172.18.0.24 <image-name>
-
 ```
 
 &nbsp;
+
+You can inspect the IP address of your container(s). E.g.:
 
 ```
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cont1
+
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cont2
 ```
 
 &nbsp;
 
 ```
-docker inspect ubu1 | grep IPAddress
-docker inspect ubu2 | grep IPAddress
+docker inspect cont1 | grep IPAddress
+docker inspect cont2 | grep IPAddress
 ```
 
 &nbsp;
 
+Connect to running container vis ssh:
 ```
 ssh docker_ubuntu@localhost -p 3021
 ssh docker_ubuntu@localhost -p 3022
