@@ -56,8 +56,8 @@ docker inspect cont2 | grep IPAddress
 
 Connect to running container vis ssh:
 ```
-ssh docker_ubuntu@localhost -p 3021
-ssh docker_ubuntu@localhost -p 3022
+ssh -p 3021 docker_ubuntu@localhost
+ssh -p 3022 docker_ubuntu@localhost
 ```
 
 &nbsp;
