@@ -10,62 +10,60 @@ Dockerfile based on ubuntu image with some more common delevopment tools.
 - pip
 - python3-venv
 - git
-
+- zip
+- curl
+- nodejs
+- npm
+- http-server
 
 ## Usage
-To build image run:
+Build image. E.g.:
 ```sh
-docker build [--build-arg usernamei=<user>] [--build-arg passwdi=<password>] -t <image-name> .
+docker build [--build-arg usernamei=<user>] [--build-arg passwdi=<password>] -t docker_ubuntu .
 ```
-> Note: This dockerfile builds image with new custom user. By default, username is `docker_ubuntu` and password is `1234`. You can change them using the optional arguments `usernamei` and `passwdi`.
+> [1] This dockerfile builds image with new custom user (beside of 'root' and 'ubuntu' users). By default, username is `docker_ubuntu` and password is `1234`. You can change them using the optional arguments `usernamei` and `passwdi`.
+
+> [2] In this example, both username and image name are 'docker_ubuntu'. However, their names will not necessarily always be the same and you can set them both as you wish.
 
 &nbsp;
 
-To connect your container via ssh, you have to set docker network, e.g:
+To connect your container via ssh, you have to set docker network. E.g.:
 ```sh
 docker network create -d bridge --subnet=172.18.0.0/16 net1
 ```
 
 &nbsp;
 
-To share a folder with your contianer
+Create container(s) from your image. E.g.:
 ```sh
-docker volume create docker_volume
+docker run -d --name cont1 -h cont1 --network net1 -p 3021:22 --ip 172.18.0.21 docker_ubuntu
+
+docker run -d --name cont2 -h cont2 --network net1 -p 3022:22 --ip 172.18.0.22 docker_ubuntu
 ```
 
 &nbsp;
 
-Create container(s) from your image
-```sh
-docker run -d --name cont1 -h cont1 --network net1 -p 3021:22 --ip 172.18.0.21 -v /home/uriziv/docker_volume:/home/defult_user/docker_volume <image-name>
-
-docker run -d --name cont2 -h cont2 --network net1 -p 3022:22 --ip 172.18.0.22 <image-name>
-
-docker run -d --name cont3 -h cont3 --network net1 -p 3023:22 --ip 172.18.0.23 <image-name>
-
-docker run -d --name cont4 -h cont4 --network net1 -p 3024:22 --ip 172.18.0.24 <image-name>
-
-```
-
-&nbsp;
+You can inspect the IP address of your container(s). E.g.:
 
 ```
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cont1
+
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cont2
 ```
 
 &nbsp;
 
 ```
-docker inspect ubu1 | grep IPAddress
-docker inspect ubu2 | grep IPAddress
+docker inspect cont1 | grep IPAddress
+docker inspect cont2 | grep IPAddress
 ```
 
 &nbsp;
 
+Connect to running container vis ssh:
 ```
-ssh docker_ubuntu@localhost -p 3021
-ssh docker_ubuntu@localhost -p 3022
+ssh -p 3021 docker_ubuntu@localhost
+ssh -p 3022 docker_ubuntu@localhost
 ```
 
 &nbsp;
