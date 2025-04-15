@@ -78,7 +78,7 @@ https://tecadmin.net/setting-up-ubuntu-docker-container-with-ssh-access/
 https://medium.com/@mfahad1667/ssh-connection-between-two-docker-container-7c9dced1aa43
 
 ## TODO
-pip install autopep8
-sudo apt-get install file
-sudo apt-get install bsdmainutils
-sudo apt-get install dos2unix
+* pip install autopep8
+* sudo apt-get install file
+* sudo apt-get install bsdmainutils
+* sudo apt-get install dos2unix
