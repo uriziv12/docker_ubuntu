@@ -80,5 +80,6 @@ https://medium.com/@mfahad1667/ssh-connection-between-two-docker-container-7c9dc
 ## TODO
 * pip install autopep8
 * sudo apt-get install file
+* sudo apt-get install tree
 * sudo apt-get install bsdmainutils
 * sudo apt-get install dos2unix
