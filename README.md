@@ -86,15 +86,15 @@ https://medium.com/@mfahad1667/ssh-connection-between-two-docker-container-7c9dc
 * Add the following to bashrc
 ```
 get_ps1 () {
-  local date_segment="\[\033[01;34m\][$(date +%m%d_%H%M%S)]\[\033[00m\]"
-  local chroot_segment="${debian_chroot:+($debian_chroot)}"
-  local user_segment="\[\033[01;32m\]\u\[\033[00m\]"
-  local host_segment="\[\033[01;36m\]\h\[\033[00m\]"
-  local git_segment="\[\033[01;31m\]$(git branch 2>/dev/null|grep -e ^* | tr "*" ":" | tr -d " ")\[\033[00m\]"
-  local working_directory_segment="\[\033[01;33m\]\w\[\033[00m\]"
-  local prompt_indicator="~> "
-  local end_line="[-----]" # TODO: calcuate number of dashes till end of line.
-  local newline="\n"
+  local date_segment='\[\033[01;34m\][$(date +%d/%m\ %H:%M:%S)]\[\033[00m\]'
+  local chroot_segment='${debian_chroot:+($debian_chroot)}'
+  local user_segment='\[\033[01;32m\]\u\[\033[00m\]'
+  local host_segment='\[\033[01;36m\]\h\[\033[00m\]'
+  local git_segment='\[\033[01;31m\]$(git branch 2>/dev/null|grep -e ^* | tr "*" ":" | tr -d " ")\[\033[00m\]'
+  local working_directory_segment='\[\033[01;33m\]\w\[\033[00m\]'
+  local prompt_indicator='~> '
+  local end_line='(---------------)' # TODO: calcuate number of dashes till end of line.
+  local newline='\n'
 
   echo -ne "${date_segment}:${chroot_segment}${user_segment}@${host_segment}${git_segment}:${working_directory_segment}:${end_line}${newline}${prompt_indicator}"
 }
