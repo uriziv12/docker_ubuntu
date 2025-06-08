@@ -51,10 +51,25 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+get_ps1 () {
+  local date_segment='\[\033[01;34m\][$(date +%d/%m\ %H:%M:%S)]\[\033[00m\]'
+  local chroot_segment='${debian_chroot:+($debian_chroot)}'
+  local user_segment='\[\033[01;32m\]\u\[\033[00m\]'
+  local host_segment='\[\033[01;36m\]\h\[\033[00m\]'
+  local git_segment='\[\033[01;31m\]$(git branch 2>/dev/null|grep -e ^* | tr "*" ":" | tr -d " ")\[\033[00m\]'
+  local working_directory_segment='\[\033[01;33m\]\w\[\033[00m\]'
+  local prompt_indicator='~> '
+  local end_line='[---------------]' # TODO: calcuate number of dashes till end of line.
+  local newline='\n'
+
+  echo -ne "${date_segment}:${chroot_segment}${user_segment}@${host_segment}${git_segment}:${working_directory_segment}${end_line}${newline}${prompt_indicator}"
+}
+
 if [ "$color_prompt" = yes ]; then
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    # My custom change of PS1 (Instead of the default setting)
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;36m\]\h\[\033[00m\]\[\033[01;31m\]$(git branch 2>/dev/null|grep -e ^* | tr "*" ":" | tr -d " ")\[\033[00m\]:\[\033[01;33m\]\w\[\033[00m\]> '
+    # OLD: My custom change of PS1 (Instead of the default setting)
+    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]@\[\033[01;36m\]\h\[\033[00m\]\[\033[01;31m\]$(git branch 2>/dev/null|grep -e ^* | tr "*" ":" | tr -d " ")\[\033[00m\]:\[\033[01;33m\]\w\[\033[00m\]> '
+    PS1="$(get_ps1)"
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi

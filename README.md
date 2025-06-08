@@ -36,9 +36,9 @@ docker network create -d bridge --subnet=172.18.0.0/16 net1
 
 Create container(s) from your image. E.g.:
 ```sh
-docker run -d --name cont1 -h cont1 --network net1 -p 3021:22 --ip 172.18.0.21 docker_ubuntu
+docker run -d --name cont1 -h cont1 --network net1 -p 3021:22 -p 4021:8080 --ip 172.18.0.21 docker_ubuntu:<tag>
 
-docker run -d --name cont2 -h cont2 --network net1 -p 3022:22 --ip 172.18.0.22 docker_ubuntu
+docker run -d --name cont2 -h cont2 --network net1 -p 3022:22 -p 4022:8080 --ip 172.18.0.22 docker_ubuntu:<tag>
 ```
 
 &nbsp;
@@ -78,26 +78,4 @@ https://tecadmin.net/setting-up-ubuntu-docker-container-with-ssh-access/
 https://medium.com/@mfahad1667/ssh-connection-between-two-docker-container-7c9dced1aa43
 
 ## TODO
-* pip install autopep8
-* sudo apt-get install file
-* sudo apt-get install tree
-* sudo apt-get install bsdmainutils
-* sudo apt-get install dos2unix
-* Add the following to bashrc
-```
-get_ps1 () {
-  local date_segment='\[\033[01;34m\][$(date +%d/%m\ %H:%M:%S)]\[\033[00m\]'
-  local chroot_segment='${debian_chroot:+($debian_chroot)}'
-  local user_segment='\[\033[01;32m\]\u\[\033[00m\]'
-  local host_segment='\[\033[01;36m\]\h\[\033[00m\]'
-  local git_segment='\[\033[01;31m\]$(git branch 2>/dev/null|grep -e ^* | tr "*" ":" | tr -d " ")\[\033[00m\]'
-  local working_directory_segment='\[\033[01;33m\]\w\[\033[00m\]'
-  local prompt_indicator='~> '
-  local end_line='[---------------]' # TODO: calcuate number of dashes till end of line.
-  local newline='\n'
-
-  echo -ne "${date_segment}:${chroot_segment}${user_segment}@${host_segment}${git_segment}:${working_directory_segment}${end_line}${newline}${prompt_indicator}"
-}
-...
-PS1="$(get_ps1)"
-```
+* Add github action to generate html.
