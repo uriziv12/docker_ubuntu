@@ -36,9 +36,9 @@ docker network create -d bridge --subnet=172.18.0.0/16 net1
 
 Create container(s) from your image. E.g.:
 ```sh
-docker run -d --name cont1 -h cont1 --network net1 -p 3021:22 --ip 172.18.0.21 docker_ubuntu
+docker run -d --name cont1 -h cont1 --network net1 -p 3021:22 -p 4021:8080 --ip 172.18.0.21 docker_ubuntu:<tag>
 
-docker run -d --name cont2 -h cont2 --network net1 -p 3022:22 --ip 172.18.0.22 docker_ubuntu
+docker run -d --name cont2 -h cont2 --network net1 -p 3022:22 -p 4022:8080 --ip 172.18.0.22 docker_ubuntu:<tag>
 ```
 
 &nbsp;
@@ -76,3 +76,6 @@ https://hub.docker.com/r/uriziv12/docker_ubuntu
 ## Links
 https://tecadmin.net/setting-up-ubuntu-docker-container-with-ssh-access/
 https://medium.com/@mfahad1667/ssh-connection-between-two-docker-container-7c9dced1aa43
+
+## TODO
+* Add github action to generate html.
