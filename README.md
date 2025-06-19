@@ -78,4 +78,3 @@ https://tecadmin.net/setting-up-ubuntu-docker-container-with-ssh-access/
 https://medium.com/@mfahad1667/ssh-connection-between-two-docker-container-7c9dced1aa43
 
 ## TODO
-* Add github action to generate html.
