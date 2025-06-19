@@ -76,3 +76,8 @@ https://hub.docker.com/r/uriziv12/docker_ubuntu
 ## Links
 https://tecadmin.net/setting-up-ubuntu-docker-container-with-ssh-access/
 https://medium.com/@mfahad1667/ssh-connection-between-two-docker-container-7c9dced1aa43
+
+## Release notes
+
+### v1.0.6
+* Alias for python venv.
