@@ -16,18 +16,27 @@ development tools.
 
 ## Usage
 
-### Build the Image
+### pull image from docker hub
+```sh
+docker pull uriziv12/docker_ubuntu:latest
+```
+
+### (Alternative to pull image) Build locally the Image
 ```sh
 docker build [--build-arg usernamei=<user>] \
              [--build-arg passwdi=<password>] \
              -t docker_ubuntu .
 ```
-> ℹ️ This Dockerfile builds an image with a custom user in addition to
+> **Note:**
+>
+> This Dockerfile builds an image with a custom user in addition to
 > the default 'root' and 'ubuntu' users. By default, the username is
 > `docker_ubuntu` and the password is `1234`. You can override these
 > defaults with the optional build arguments `usernamei` and `passwdi`.
 
-> Note: The username and image name may share the same value in examples
+> **Note:**
+>
+> The username and image name may share the same value in examples
 > for simplicity, but they are independent and can be set as desired.
 
 ### Set Up Docker Network (for SSH access between containers)
@@ -68,13 +77,15 @@ cd /path/to/your/folder
 http-srv
 ```
 
-Note: Make sure no firewall or security rule is blocking port 8080.
-Also, ensure the server is listening on `0.0.0.0` (the default for
-`http.server`) so it is accessible from outside the container.
-
-This will start an HTTP server accessible on port 8080. If you mapped
-container port 8080 to the host (e.g., `-p 4021:8080`), you can access
-it via `http://localhost:4021` from your host machine.
+> **Note:**
+> 
+> Make sure no firewall or security rule is blocking port 8080.
+> Also, ensure the server is listening on `0.0.0.0` (the default for
+> `http.server`) so it is accessible from outside the container.
+> 
+> This will start an HTTP server accessible on port 8080. If you mapped
+> container port 8080 to the host (e.g., `-p 4021:8080`), you can access
+> it via `http://localhost:4021` from your host machine.
 
 ### Using Python Virtual Environments
 
@@ -96,7 +107,7 @@ https://hub.docker.com/r/uriziv12/docker_ubuntu
 
 ## Release Notes
 ### v1.0.6
-- Added alias for python venv
+- Added alias 'venv' for python venv and 'http-srv' for http-server.
 - Removed nodejs, npm, and http-server from Dockerfile and updated
-  README accordingly
-- Added usage example for serving files using Python HTTP server
+  README accordingly.
+- Added usage example for serving files using Python HTTP server.
