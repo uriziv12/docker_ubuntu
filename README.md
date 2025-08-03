@@ -76,20 +76,18 @@ container port 8080 to the host (e.g., `-p 4021:8080`), you can access
 it via `http://localhost:4021` from your host machine.
 
 ### Using Python Virtual Environments
-Once inside the container:
+
+A Python virtual environment is pre-created for you at `~/venv` during the Docker image build process.  
+To activate this environment, use the alias:
+
 ```sh
-# Create a new virtual environment
-python3 -m venv ~/venv
-
-# Activate the virtual environment
-source ~/venv/bin/activate
-
-# Deactivate when done
-deactivate
+venv
 ```
-You can also use the alias `venv_activate` if defined:
+
+To deactivate the virtual environment when done, simply run:
+
 ```sh
-venv_activate
+deactivate
 ```
 
 ## Docker Hub
