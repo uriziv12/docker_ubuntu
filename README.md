@@ -62,9 +62,10 @@ ssh -p 3022 docker_ubuntu@localhost
 ```
 
 ### Serving Files via Python HTTP Server
+To start http server from any folder, use the following alias:
 ```sh
 cd /path/to/your/folder
-python3 -m http.server 8080
+http-srv
 ```
 
 Note: Make sure no firewall or security rule is blocking port 8080.
