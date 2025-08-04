@@ -27,6 +27,10 @@ RUN mkdir /var/run/sshd && \
 # Inside container - it's better to run python by /home/$usernamei/python_venv/bin/python3 (otherwise some tools, like pip, might be blocked).
 USER $usernamei
 RUN mkdir /home/$usernamei/python_venv
+
+# Add git global alias
+RUN git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%aN%Creset' --abbrev-commit --date=relative"
+
 USER root
 RUN python3 -m venv /home/$usernamei/python_venv
 RUN chown $usernamei: /home/$usernamei/python_venv -R
