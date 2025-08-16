@@ -24,19 +24,19 @@ RUN mkdir /var/run/sshd && \
     echo "export VISIBLE=now" >> /etc/profile
 
 # Create python virtual env
-# Inside container - it's better to run python by /home/$usernamei/python_venv/bin/python3 (otherwise some tools, like pip, might be blocked).
+# Inside container - it's better to run python by /home/$usernamei/venv/bin/python3 (otherwise some tools, like pip, might be blocked).
 USER $usernamei
-RUN mkdir /home/$usernamei/python_venv
+RUN mkdir /home/$usernamei/venv
 
 # Add git global alias
 RUN git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%aN%Creset' --abbrev-commit --date=relative"
 
 USER root
-RUN python3 -m venv /home/$usernamei/python_venv
-RUN chown $usernamei: /home/$usernamei/python_venv -R
+RUN python3 -m venv /home/$usernamei/venv
+RUN chown $usernamei: /home/$usernamei/venv -R
 
-# Install autopep8
-RUN /home/$usernamei/python_venv/bin/pip install autopep8
+# Install black
+RUN /home/$usernamei/venv/bin/pip install black
 
 # Create repositories directory
 USER $usernamei

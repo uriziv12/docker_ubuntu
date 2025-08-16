@@ -126,5 +126,8 @@ alias repos='cd $REPOS'
 alias gs='git status'
 alias gl='git lg'
 alias gg='git grep -n --color'
-alias venv='source $HOME/python_venv/bin/activate'
+alias venv='source $HOME/venv/bin/activate'
 alias http-srv='python3 -m http.server 8080'
+alias tesco='curl -Is http://www.example.com > /dev/null && echo "Connection to www.example.com successful!" || echo "Connection to www.example.com failed."'
+
+venv
