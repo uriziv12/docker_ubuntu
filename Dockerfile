@@ -14,7 +14,7 @@ RUN  useradd -rm -d /home/$usernamei -s /bin/bash -g root -G sudo -u 1001 $usern
 # Update the system, install OpenSSH Server, Client, vim, sudo, python3, pip, python3-venv, git, zip, curl
 RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y openssh-server openssh-client vim sudo python3 python3-pip python3-venv git zip curl \
-    file tree bsdmainutils dos2unix && \
+    file tree bsdmainutils dos2unix shfmt && \
     apt-get clean
 
 # Set up configuration for SSH
@@ -24,15 +24,19 @@ RUN mkdir /var/run/sshd && \
     echo "export VISIBLE=now" >> /etc/profile
 
 # Create python virtual env
-# Inside container - it's better to run python by /home/$usernamei/python_venv/bin/python3 (otherwise some tools, like pip, might be blocked).
+# Inside container - it's better to run python by /home/$usernamei/venv/bin/python3 (otherwise some tools, like pip, might be blocked).
 USER $usernamei
-RUN mkdir /home/$usernamei/python_venv
-USER root
-RUN python3 -m venv /home/$usernamei/python_venv
-RUN chown $usernamei: /home/$usernamei/python_venv -R
+RUN mkdir /home/$usernamei/venv
 
-# Install autopep8
-RUN /home/$usernamei/python_venv/bin/pip install autopep8
+# Add git global alias
+RUN git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%aN%Creset' --abbrev-commit --date=relative"
+
+USER root
+RUN python3 -m venv /home/$usernamei/venv
+RUN chown $usernamei: /home/$usernamei/venv -R
+
+# Install black
+RUN /home/$usernamei/venv/bin/pip install black
 
 # Create repositories directory
 USER $usernamei

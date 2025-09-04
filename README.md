@@ -106,6 +106,13 @@ deactivate
 https://hub.docker.com/r/uriziv12/docker_ubuntu
 
 ## Release Notes
+
+### v1.0.7
+- Git alias `lg` for a graphical log view.
+- Install black instead of autopep8
+- Change venv folder name (fron python_venv to venv) 
+- Install shfmt
+
 ### v1.0.6
 - Added alias 'venv' for python venv and 'http-srv' for http-server.
 - Removed nodejs, npm, and http-server from Dockerfile and updated
