@@ -18,7 +18,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get clean
 
 # Set up configuration for SSH
-RUN mkdir /var/run/sshd && \
+RUN mkdir -p /var/run/sshd && \
     sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
     sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd && \
     echo "export VISIBLE=now" >> /etc/profile
